@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.5</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>com.snakegame</groupId>
+  <artifactId>snake-game-backend</artifactId>
+  <version>1.0.0</version>
+  <name>snake-game-backend</name>
+  <description>Minimal Spring Boot backend for the local Snake game</description>
+
+  <properties>
+    <java.version>21</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- Web layer: REST controllers + embedded Tomcat + JSON (Jackson) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Testing: JUnit 5, AssertJ, MockMvc, Spring test context -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!--
+      Serve the sibling ../frontend directory as static web content.
+
+      The real frontend sources stay in SnakeGame/frontend/ (the requested
+      layout). Maven copies them into target/classes/static/ at build time,
+      and Spring Boot serves classpath:/static/ automatically. This means the
+      browser talks to the backend on the SAME origin (localhost:8080),
+      so no CORS configuration and no separate dev server are needed.
+
+      `spring-boot:run` executes the process-resources phase, so this copy
+      also happens for local development runs.
+    -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.basedir}/../frontend</directory>
+        <targetPath>static</targetPath>
+        <filtering>false</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

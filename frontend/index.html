@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake &mdash; Local Spring Boot Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <header class="app__header">
+      <h1 class="app__title">Snake</h1>
+      <p class="app__subtitle">HTML &middot; CSS &middot; JavaScript frontend &mdash; Java Spring Boot backend</p>
+    </header>
+
+    <div class="app__main">
+
+      <!-- ------------------------------------------------------ game column -->
+      <section class="panel panel--game" aria-label="Game">
+        <div class="scorebar">
+          <div class="stat">
+            <span class="stat__label">Score</span>
+            <span class="stat__value" id="score">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label">Best</span>
+            <span class="stat__value stat__value--muted" id="best">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label">Speed</span>
+            <span class="stat__value stat__value--muted" id="level">1</span>
+          </div>
+          <div class="stat stat--backend">
+            <span class="stat__label">Backend</span>
+            <span class="stat__value stat__value--muted" id="backend-status">
+              <span class="dot dot--unknown" id="backend-dot"></span>
+              <span id="backend-text">checking&hellip;</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="board" id="board-wrap">
+          <canvas id="board" width="480" height="480" aria-label="Snake game board"></canvas>
+
+          <div class="overlay" id="overlay">
+            <div class="overlay__card">
+              <h2 class="overlay__title" id="overlay-title">Ready?</h2>
+              <p class="overlay__text" id="overlay-text">Press <kbd>Space</kbd> or the Start button.</p>
+              <p class="overlay__final" id="overlay-final" hidden></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button type="button" class="btn btn--primary" id="btn-start">Start</button>
+          <button type="button" class="btn" id="btn-pause" disabled>Pause</button>
+          <button type="button" class="btn" id="btn-restart">Restart</button>
+        </div>
+      </section>
+
+      <!-- --------------------------------------------------- sidebar column -->
+      <aside class="panel panel--side">
+
+        <div class="card">
+          <h2 class="card__title">Controls</h2>
+          <ul class="keys">
+            <li><kbd>&uarr;</kbd><kbd>&larr;</kbd><kbd>&darr;</kbd><kbd>&rarr;</kbd><span>Move</span></li>
+            <li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>Move</span></li>
+            <li><kbd>Space</kbd><span>Start / Pause</span></li>
+            <li><kbd>R</kbd><span>Restart</span></li>
+          </ul>
+          <p class="hint">
+            Eat the <span class="swatch swatch--food"></span> food to grow. Each bite is
+            <strong>+10</strong> points and nudges the speed up. Hitting a wall or your
+            own tail ends the run.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="card__title">Submit your score</h2>
+          <label class="field">
+            <span class="field__label">Player name</span>
+            <input type="text" id="player-name" maxlength="20" placeholder="Anonymous"
+                   autocomplete="off" spellcheck="false">
+          </label>
+          <button type="button" class="btn btn--full" id="btn-submit" disabled>
+            Submit score
+          </button>
+          <p class="status" id="submit-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="card">
+          <h2 class="card__title">Session scores</h2>
+          <button type="button" class="btn btn--small" id="btn-refresh">Refresh</button>
+          <ol class="scorelist" id="scorelist">
+            <li class="scorelist__empty">No scores yet.</li>
+          </ol>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer class="app__footer">
+      <p>Runs entirely on <code>localhost</code>. No external services, no tracking, no accounts.</p>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

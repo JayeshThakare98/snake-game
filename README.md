@@ -1,5 +1,8 @@
 # Snake Game — HTML/CSS/JS frontend + Java Spring Boot backend
 
+[![CI](https://github.com/JayeshThakare98/snake-game/actions/workflows/ci.yml/badge.svg)](https://github.com/JayeshThakare98/snake-game/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 A complete, playable Snake game that runs entirely on your own machine.
 The frontend is plain HTML, CSS and JavaScript; the backend is a small
 Java 21 / Spring Boot service that serves the frontend and stores scores
@@ -209,3 +212,27 @@ mvn -v             # Apache Maven 3.9.16
 - **No persistence between sessions** and no shared/online leaderboard.
 - The game engine tests cover logic, not pixels. Visual polish was confirmed by
   loading the real page in a browser, not by automated screenshot comparison.
+
+---
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs both suites on every push and pull request to `main`:
+
+| Job | What it runs |
+|---|---|
+| **Backend (Java 21 / Maven)** | `mvn -B -ntp test` on Temurin 21, with Maven dependency caching. Surefire reports are uploaded as an artifact. |
+| **Frontend engine (Node)** | `node --test tests/game-engine.test.js` |
+
+The badge at the top reflects the real status of that workflow — it is not a
+hand-written or decorative label, so if a test breaks the badge turns red.
+
+---
+
+## License
+
+[MIT](LICENSE) — Copyright (c) 2026 Jayesh Thakare.
+
+You are free to use, modify, and distribute this project, including commercially,
+provided the copyright notice and permission notice are retained.
+
